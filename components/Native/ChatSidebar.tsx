@@ -26,8 +26,6 @@ type ChatSidebarProps = {
 
 export default function ChatSidebar({
   collapsed = false,
-  onNewChat,
-  onSelectConversation,
   onRenameConversation,
   onDeleteConversation,
   handleChange
@@ -46,7 +44,7 @@ export default function ChatSidebar({
             className="flex-1 inline-flex items-center gap-2 h-9 px-3 rounded-lg"
           >
             <span className="text-xl text-primary font-medium">
-              Zintarh's <span className="text-foreground">Portfolio</span>
+              Zintarh&apos;s <span className="text-foreground">Portfolio</span>
             </span>
           </Link>
         )}

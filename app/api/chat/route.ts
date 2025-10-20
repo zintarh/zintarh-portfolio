@@ -1,6 +1,5 @@
 import { openai } from "@ai-sdk/openai";
 import { convertToModelMessages, streamText, UIMessage } from "ai";
-import z from "zod";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;

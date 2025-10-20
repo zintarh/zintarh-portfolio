@@ -4,12 +4,9 @@ import ChatSidebar, {
 } from "@/components/Native/ChatSidebar";
 import ChatInterface from "@/components/Native/ChatInterface";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { ProjectCard } from "@/components/Native/ProjectCard";
-import { getProjects } from "@/lib/project";
-import Contact from "@/components/Native/Contact";
+import React, { useEffect, useState, Suspense } from "react";
 
-export default function page() {
+function AskPageContent() {
   const searchParams = useSearchParams();
   const prompt = searchParams.get("prompt")
     ? decodeURIComponent(searchParams.get("prompt")!).replace(/-/g, " ")
@@ -46,5 +43,13 @@ export default function page() {
         <ChatInterface prompt={formattedPrompt} />
       </div>
     </main>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AskPageContent />
+    </Suspense>
   );
 }
