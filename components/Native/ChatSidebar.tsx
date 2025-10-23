@@ -59,7 +59,7 @@ export default function ChatSidebar({
           <div key={id}>
             <button
               onClick={ () => handleChange(c)}
-              className="flex rounded-full border-2 border-border hover:bg-primary hover:border-primary px-2 py-2 items-center gap-2 flex-1 text-left"
+              className="flex rounded-full border-2 border-border hover:bg-black hover:border-black px-3 py-3 items-center gap-2 flex-1 text-left"
             >
               {!collapsed && (
                 <span className="text-base truncate" title={c}>

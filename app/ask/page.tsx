@@ -5,20 +5,21 @@ import ChatSidebar, {
 import ChatInterface from "@/components/Native/ChatInterface";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState, Suspense } from "react";
+import { decodeFromHex } from "@/lib/utils";
 
 function AskPageContent() {
   const searchParams = useSearchParams();
-  const prompt = searchParams.get("prompt")
-    ? decodeURIComponent(searchParams.get("prompt")!).replace(/-/g, " ")
-    : "";
+  const value = searchParams.get("value") ?? "";
 
-  const [formattedPrompt, setFormattedPrompt] = useState<string>("");
+  const [prompt, setprompt] = useState<string>("");
 
   useEffect(() => {
-    if (prompt.length) {
-      setFormattedPrompt(prompt);
+    if (value.length) {
+      setprompt(decodeFromHex(value));
     }
-  }, [prompt]);
+  }, [value]);
+
+  console.log(prompt);
 
   const conversations: ConversationItem[] = [
     { id: "1", title: "New chat", selected: true },
@@ -26,10 +27,8 @@ function AskPageContent() {
   ];
 
   const handlechange = (prompt: string) => {
-    setFormattedPrompt(prompt);
+    setprompt(prompt);
   };
-
-
 
   return (
     <main className="flex min-h-screen h-screen overflow-hidden">
@@ -39,8 +38,11 @@ function AskPageContent() {
           conversations={conversations}
         />
       </div>
-      <div className="flex-1 p-4">
-        <ChatInterface prompt={formattedPrompt} />
+      <div className="flex-1 p-4 bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat relative">
+        <div className="absolute inset-0 bg-background/30"></div>
+        <div className=" z-10">
+          <ChatInterface prompt={prompt} />
+        </div>
       </div>
     </main>
   );

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import TextType from "../TextType";
 import { SendIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { encodeToHex } from "@/lib/utils";
 
 export default function Hero() {
   const [prompt, setPrompt] = useState<string>("");
@@ -14,16 +15,14 @@ export default function Hero() {
   };
 
   const handlePromptChange = (prompt: string) => {
-    const promptWithHyphens = prompt.replace(/\s+/g, "-");
-    const encodedPrompt = encodeURIComponent(promptWithHyphens);
-    router.push(`/ask?prompt=${encodedPrompt}`);
+    router.push(`/ask?value=${encodeToHex(prompt)}`);
   };
 
   return (
     <div className=" max-w-4xl mx-auto">
       <div className="mb-10">
         <TextType
-          text="Hello! I’m an AI assistant "
+          text="Hello! I’m an AI Assistant "
           className="text-5xl font-semibold mb-4 text-black "
           typingSpeed={75}
           pauseDuration={1500}
@@ -57,7 +56,7 @@ export default function Hero() {
             <button
               disabled={!prompt.trim()}
               onClick={() => handlePromptChange(prompt)}
-              className="rounded-full hover:bg-secondary-foreground flex items-center justify-center border-2 border-border bg-background h-12 w-12"
+              className="rounded-full hover:bg-primary flex items-center justify-center border-2 border-border bg-background h-12 w-12"
             >
               <SendIcon className="" />
             </button>
@@ -73,7 +72,7 @@ export default function Hero() {
               <button
                 key={suggestion}
                 onClick={() => handlePromptChange(suggestion)}
-                className=" border-1 font-semibold px-3 py-3 rounded-xl text-base w-fit text-center border-primary  hover:bg-primary"
+                className=" border-1 font-semibold px-3 py-3 rounded-xl text-base w-fit text-center border-primary hover:border-black  hover:bg-black"
               >
                 {suggestion}
               </button>

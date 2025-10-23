@@ -67,15 +67,7 @@ async function showProjects(userInput: string) {
         },
       },
 
-      // opensource: {
-      //   description: "Opensource contributions ",
-      //   inputSchema: z.object(),
-      //   generate: async function* () {
-      //     yield <p>Loading...</p>;
-
-      //     return <Contact />;
-      //   },
-      // },
+  
     },
     text: ({ content, done }) => {
       if (done) {
@@ -84,13 +76,18 @@ async function showProjects(userInput: string) {
           { role: "assistant", content },
         ]);
       }
-      return <div>{content}</div>;
+      return (
+        <div className="mr-auto ${bubbleBase} bg-[#202020] text-foreground rounded-bl-md">
+          {content}
+        </div>
+      );
     },
   });
 
   return {
     id: generateId(),
     role: "assistant",
+    result: result,
     display: result.value,
   };
 }
@@ -100,4 +97,3 @@ export const AI = createAI<AIState, UIState>({
   initialUIState: [],
   initialAIState: [],
 });
-

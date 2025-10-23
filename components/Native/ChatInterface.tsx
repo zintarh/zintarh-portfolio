@@ -1,5 +1,6 @@
 "use client";
 
+import { bubbleBase } from "@/lib/constants";
 import { ClientMessage } from "@/lib/types";
 import { useChat } from "@ai-sdk/react";
 import { useActions, useUIState } from "@ai-sdk/rsc";
@@ -26,11 +27,15 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
     }
   }, [messages.length, conversation.length]);
 
-  useEffect(() => {
-    if (prompt.length > 0) {
-      handleContinueConversation();
-    }
-  }, [prompt]);
+  // useEffect(() => {
+  //   if (prompt.length > 0) {
+  //     setInput(prompt);
+
+  //     setTimeout(() => {
+  //       handleContinueConversation(prompt);
+  //     }, 200);
+  //   }
+  // }, [prompt]);
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -39,7 +44,7 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
     }
   }
 
-  const handleContinueConversation = async () => {
+  const handleContinueConversation = async (input: string) => {
     setConversation((currentConversation: ClientMessage[]) => [
       ...currentConversation,
       { id: generateId(), role: "user", display: input },
@@ -55,25 +60,23 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
     setInput("");
   };
 
-  const bubbleBase =
-    "max-w-[50%] px-4 py-3 rounded-2xl text-sm leading-relaxed";
 
-
+  console.log(conversation, "prompt");
 
   return (
     <div className="h-12/12 flex flex-col max-w-6xl mx-auto rounded-3xl bg-background ">
       {conversation.length === 0 ? (
         <div className="flex-1 flex items-center justify-center p-6">
-          <div className="w-full max-w-4xl flex items-center justify-between border-2 bg-background border-border rounded-3xl h-[72px] px-4">
+          <div className="w-full max-w-4xl flex items-center justify-between border-2 bg-background border-border rounded-full h-[72px] px-4">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKeyDown}
               placeholder="What do you want to know about Zintarh?"
-              className="flex-1 h-full outline-0 placeholder:text-base font-medium placeholder:text-foreground"
+              className="flex-1 h-full outline-0 placeholder:text-base font-medium placeholder:text-foreground/60"
             />
             <button
-              onClick={handleContinueConversation}
+              onClick={() => handleContinueConversation(input)}
               disabled={!input.trim() || isLoading}
               className="ml-2 rounded-full hover:bg-primary flex items-center justify-center border-2 border-border bg-background h-10 w-10 disabled:opacity-50"
             >
@@ -91,7 +94,7 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
                   className={
                     message.role === "user"
                       ? ` ${bubbleBase} ml-auto w-fit text-primary-foreground rounded-br-md`
-                      : ` mr-auto ${bubbleBase} bg-[#202020] text-foreground rounded-bl-md`
+                      : ` `
                   }
                 >
                   <div className="text-lg"> {message.display}</div>
@@ -111,7 +114,7 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
                 className="flex-1 h-full outline-0 placeholder:text-base font-medium placeholder:text-foreground"
               />
               <button
-                onClick={handleContinueConversation}
+                onClick={() => handleContinueConversation(input)}
                 disabled={!input.trim() || isLoading}
                 className="ml-2 rounded-full hover:bg-primary flex items-center justify-center border-2 border-border bg-background h-10 w-10 disabled:opacity-50"
               >

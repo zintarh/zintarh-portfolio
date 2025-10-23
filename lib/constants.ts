@@ -7,3 +7,7 @@ export const suggestions = [
   "Contact her",
 
 ];
+
+
+export const bubbleBase =
+"max-w-[50%] px-4 py-3 rounded-2xl text-sm leading-relaxed";

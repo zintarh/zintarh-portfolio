@@ -4,7 +4,7 @@ import Hero from "@/components/Native/Hero";
 
 export default function Home() {
   return (
-    <div className="relative bg-background h-screen items-center  justify-center flex flex-col">
+    <div className="relative bg-background h-screen items-center  justify-center flex flex-col bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat ">
       <LightRays
         raysOrigin="top-center"
         raysColor="#00ffff"
