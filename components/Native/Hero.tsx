@@ -63,7 +63,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="sm:max-w-3xl w-full">
+        <div className=" w-full">
           <p className="mb-3 font-bold text-sm text-foreground/80">
             Quick Actions
           </p>
