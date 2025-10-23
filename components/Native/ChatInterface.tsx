@@ -60,7 +60,6 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
     setInput("");
   };
 
-
   console.log(conversation, "prompt");
 
   return (
