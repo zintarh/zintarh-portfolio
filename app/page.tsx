@@ -18,7 +18,7 @@ export default function Home() {
         className="custom-rays"
       />
 
-      <div className="absolute w-full px-10">
+      <div className="absolute w-full px-5">
         <Hero />
       </div>
 
