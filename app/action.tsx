@@ -8,6 +8,7 @@ import { ServerMessage } from "@/lib/types";
 import { generateId } from "ai";
 import { AssistantPrompt } from "@/lib/ai/prompt";
 import Contact from "@/components/Native/Contact";
+import { bubbleBase } from "@/lib/constants";
 
 export type AIState = Array<{
   role: "user" | "assistant" | "system" | "function";
@@ -33,7 +34,8 @@ async function showProjects(userInput: string) {
     ],
     tools: {
       projects: {
-        description: "Show projects by category (Web3 or AI)",
+        description:
+          "Use this tool when the user asks to see projects or works. The user might use phrases like 'show projects', 'show your works', 'Zintarh's works', or 'her works'. This tool can filter by category: 'Web3' or 'AI'",
         inputSchema: z.object({
           category: z.enum(["web3", "ai"]),
         }),
@@ -46,7 +48,7 @@ async function showProjects(userInput: string) {
           );
 
           return (
-            <div className="space-y-3">
+            <div className={`space-y-3 `}>
               <div className="grid gap-3 ">
                 {projects.map((p) => (
                   <ProjectCard {...p} key={p.title} />
@@ -66,8 +68,6 @@ async function showProjects(userInput: string) {
           return <Contact />;
         },
       },
-
-  
     },
     text: ({ content, done }) => {
       if (done) {
@@ -77,7 +77,9 @@ async function showProjects(userInput: string) {
         ]);
       }
       return (
-        <div className="mr-auto ${bubbleBase} bg-[#202020] text-foreground rounded-bl-md">
+        <div
+          className={`sm:mr-auto sm:max-w-[50%] w-full ${bubbleBase} bg-[#202020] text-foreground text-lg rounded-bl-md`}
+        >
           {content}
         </div>
       );
