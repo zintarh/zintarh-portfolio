@@ -12,7 +12,7 @@ export function encodeToHex(str: string): string {
   try {
     const encoder = new TextEncoder();
     const data = encoder.encode(str);
-    let hex = Array.from(data, (byte) => byte.toString(16).padStart(2, '0')).join('');
+    const hex = Array.from(data, (byte) => byte.toString(16).padStart(2, '0')).join('');
     return hex;
     
   } catch (e) {
@@ -46,7 +46,7 @@ export function decodeFromHex(hex: string): string {
     const decoder = new TextDecoder();
     return decoder.decode(bytes);
 
-  } catch (e) {
+  } catch {
     return "";
   }
 }
