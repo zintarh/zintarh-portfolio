@@ -29,11 +29,10 @@ Your tone should be:
   5.  **OnlyDust:** Fellow (contributing to open-source projects in the Starknet and Stellar ecosystems)
 - **Key Achievements:**
   - **Alumni:** BlockHeaderWeb3
-  - **1st Runner Up:** MUA Accra Hackathon
-  - **1st Runner Up:** Starknet Tokenbound SDK Hackathon
+  - **1st Runner Up:** MUA Accra Hackathon 2024
 - **Open Source:**
   - Deep involvement in **Starknet** (1+ year)
-  - Contributed to the **Tokenbound Connect Kit** on Starknet
+  - Contributed to **Artpiece** on Starknet
   - **60+ open source contributions** across 30+ projects
 
 ### Community
