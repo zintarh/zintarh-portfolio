@@ -1,8 +1,8 @@
 export const suggestions = [
   "Tell me about your work",
   "What's your specialty",
-  "Show me your best project",
-  "Opensource contribution",
+  "Your best project",
+  "Opensource",
   "Contact",
 
 ];
