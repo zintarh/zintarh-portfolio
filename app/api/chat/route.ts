@@ -1,20 +1,18 @@
 import { openai } from "@ai-sdk/openai";
-import { streamText } from "ai";
+import { streamText, convertToModelMessages } from "ai";
 import { AssistantPrompt } from "@/lib/ai/prompt";
+import { UIMessage } from "ai";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = await streamText({
     model: openai("gpt-4o"),
     system: AssistantPrompt,
-    messages: messages.map((msg: any) => ({
-      role: msg.role,
-      content: msg.parts?.find((p: any) => p.type === "text")?.text || msg.content || "",
-    })),
+    messages: convertToModelMessages(messages),
   });
 
   return result.toTextStreamResponse();

@@ -10,8 +10,9 @@ import {
   Rocket,
   Award,
   Building2,
-  GitPullRequest,
   FolderKanban,
+  ExternalLink,
+  Image as ImageIcon,
 } from "lucide-react";
 import { getProjects } from "@/lib/project";
 
@@ -21,19 +22,14 @@ export default function Hero() {
   const [prompt, setPrompt] = useState<string>("");
   const [countedStats, setCountedStats] = useState({
     projects: 0,
-    contributions: 0,
-    repositories: 0,
-    companies: 0,
+    pullRequests: 0,
+    ecosystems: 0,
   });
 
-  const projects = getProjects();
   const stats = {
-    projects: projects.filter(
-      (p) => !p.title.toLowerCase().includes("opensource")
-    ).length,
-    contributions: 60,
-    repositories: 30,
-    companies: 5,
+    projects: 38,
+    pullRequests: 116,
+    ecosystems: 4,
   };
 
   useEffect(() => {
@@ -43,28 +39,25 @@ export default function Hero() {
     const interval = duration / steps;
 
     const targetProjects = stats.projects;
-    const targetContributions = stats.contributions;
-    const targetRepositories = stats.repositories;
-    const targetCompanies = stats.companies;
-
+    const targetPullRequests = stats.pullRequests;
+    const targetEcosystems = stats.ecosystems;
+    
     let currentStep = 0;
     const timer = setInterval(() => {
       currentStep++;
       const progress = currentStep / steps;
       setCountedStats({
         projects: Math.floor(targetProjects * progress),
-        contributions: Math.floor(targetContributions * progress),
-        repositories: Math.floor(targetRepositories * progress),
-        companies: Math.floor(targetCompanies * progress),
+        pullRequests: Math.floor(targetPullRequests * progress),
+        ecosystems: Math.floor(targetEcosystems * progress),
       });
-
+      
       if (currentStep >= steps) {
         clearInterval(timer);
         setCountedStats({
           projects: targetProjects,
-          contributions: targetContributions,
-          repositories: targetRepositories,
-          companies: targetCompanies,
+          pullRequests: targetPullRequests,
+          ecosystems: targetEcosystems,
         });
       }
     }, interval);
@@ -100,9 +93,24 @@ export default function Hero() {
   ];
 
   const achievements = [
-    { icon: Award, text: "Ethereum World Fair Volunteer - Devcon Argentina" },
-    { icon: Building2, text: "OnlyDust Fellow - Starknet & Stellar" },
-    { icon: GitBranch, text: "60+ Open Source Contributions" },
+    { 
+      icon: Award, 
+      text: "Ethereum World Fair Volunteer - Devcon Argentina",
+      link: "https://drive.google.com/drive/folders/YOUR_ETHEREUM_WORLD_FAIR_FOLDER_ID",
+      description: "View volunteering pictures"
+    },
+    { 
+      icon: Building2, 
+      text: "OnlyDust Fellow - Starknet & Stellar",
+      link: "https://drive.google.com/drive/folders/YOUR_ONLYDUST_FOLDER_ID",
+      description: "View pictures"
+    },
+    { 
+      icon: GitBranch, 
+      text: "Starknet Frontend Mentor at BlockHeaderWeb3, Kaduna",
+      link: "https://drive.google.com/drive/folders/YOUR_MENTORING_FOLDER_ID",
+      description: "View pictures"
+    },
   ];
 
   return (
@@ -152,12 +160,14 @@ export default function Hero() {
                 <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 bg-primary/5 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
               </button>
-              <button
-                onClick={() => router.push("/ask")}
-                className="px-6 py-3 rounded-xl bg-primary/10 border-2 border-primary hover:bg-primary/20 transition-all duration-300 font-semibold text-sm"
+              <a
+                href="https://docs.google.com/document/d/YOUR_RESUME_ID/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-xl bg-primary/10 border-2 border-primary hover:bg-primary/20 transition-all duration-300 font-semibold text-sm inline-block text-center"
               >
-                Chat with Me
-              </button>
+                View My Resume
+              </a>
             </div>
           </div>
 
@@ -165,9 +175,12 @@ export default function Hero() {
             {achievements.map((achievement, index) => {
               const Icon = achievement.icon;
               return (
-                <div
+                <a
                   key={index}
-                  className="group relative p-4 rounded-xl bg-background/50 border border-border backdrop-blur-sm hover:bg-background/70 hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                  href={achievement.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-4 rounded-xl bg-background/50 border border-border backdrop-blur-sm hover:bg-background/70 hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer block"
                   style={{
                     animationDelay: `${index * 150}ms`,
                     opacity: isVisible ? 1 : 0,
@@ -178,12 +191,17 @@ export default function Hero() {
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Icon className="w-5 h-5 text-primary" />
                     </div>
-                    <span className="text-xs font-medium text-foreground/80 flex-1">
-                      {achievement.text}
-                    </span>
+                    <div className="flex-1">
+                      <span className="text-xs font-medium text-foreground/80 block">{achievement.text}</span>
+                      <div className="flex items-center gap-1 mt-1">
+                        <ImageIcon className="w-3 h-3 text-primary/60" />
+                        <span className="text-xs text-primary/60 font-medium">{achievement.description}</span>
+                        <ExternalLink className="w-3 h-3 text-primary/60 ml-1" />
+                      </div>
+                    </div>
                   </div>
                   <div className="absolute inset-0 bg-primary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
-                </div>
+                </a>
               );
             })}
           </div>
@@ -201,7 +219,7 @@ export default function Hero() {
           </h2>
           <div className="h-px flex-1 bg-border/50 ml-4"></div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {[
             {
               icon: FolderKanban,
@@ -212,22 +230,15 @@ export default function Hero() {
             },
             {
               icon: GitBranch,
-              value: countedStats.contributions,
-              label: "Contributions",
+              value: countedStats.pullRequests,
+              label: "Pull Requests Merged",
               color: "text-foreground",
               bg: "bg-background/50",
             },
             {
-              icon: Code2,
-              value: countedStats.repositories,
-              label: "Repositories",
-              color: "text-foreground",
-              bg: "bg-background/50",
-            },
-            {
-              icon: Building2,
-              value: countedStats.companies,
-              label: "Companies",
+              icon: Network,
+              value: countedStats.ecosystems,
+              label: "Ecosystems",
               color: "text-foreground",
               bg: "bg-background/50",
             },
@@ -250,7 +261,7 @@ export default function Hero() {
                 </div>
                 <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">
                   {stat.value}
-                  {stat.label !== "Companies" ? "+" : ""}
+                  {stat.label === "Pull Requests Merged" ? "" : stat.label === "Ecosystems" ? "" : "+"}
                 </div>
                 <div className="text-xs text-foreground/60 font-medium">
                   {stat.label}

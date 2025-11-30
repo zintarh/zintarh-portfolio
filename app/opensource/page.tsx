@@ -3,16 +3,17 @@ import React, { useState, useEffect } from "react";
 import { ProjectCard } from "@/components/Native/ProjectCard";
 import { getProjects } from "@/lib/project";
 import { ProjectData } from "@/lib/types";
-import { GitBranch, GitPullRequest, Code2, TrendingUp, Star, Calendar, Globe } from "lucide-react";
+import { GitBranch, GitPullRequest, TrendingUp, Globe, FolderKanban, Network } from "lucide-react";
+import Image from "next/image";
 import FloatingNav from "@/components/Native/FloatingNav";
 import MobileNav from "@/components/Native/MobileNav";
 
 export default function OpensourcePage() {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [countedStats, setCountedStats] = useState({
-    contributions: 0,
-    repositories: 0,
-    prs: 0,
+    projects: 0,
+    pullRequests: 0,
+    ecosystems: 0,
   });
 
   const allProjects = getProjects();
@@ -21,21 +22,19 @@ export default function OpensourcePage() {
     p.title.toLowerCase().includes("opensource")
   );
 
-  // Opensource statistics from prompt data
   const opensourceStats = {
-    totalContributions: 60,
-    totalRepositories: 30,
-    totalPRs: 60,
+    totalProjects: 38,
+    totalPullRequests: 116,
+    totalEcosystems: 4,
     primaryEcosystem: "Starknet",
     ecosystemYears: "1+",
     notableProject: "Artpiece",
     currentRole: "OnlyDust Fellow",
-    ecosystems: ["Starknet", "Stellar"],
+    ecosystems: ["Ethereum", "Starknet", "Stellar", "Optimism"],
   };
 
   useEffect(() => {
     setIsVisible(true);
-    // Animate counting up
     const duration = 2000;
     const steps = 60;
     const interval = duration / steps;
@@ -45,17 +44,17 @@ export default function OpensourcePage() {
       currentStep++;
       const progress = currentStep / steps;
       setCountedStats({
-        contributions: Math.floor(opensourceStats.totalContributions * progress),
-        repositories: Math.floor(opensourceStats.totalRepositories * progress),
-        prs: Math.floor(opensourceStats.totalPRs * progress),
+        projects: Math.floor(opensourceStats.totalProjects * progress),
+        pullRequests: Math.floor(opensourceStats.totalPullRequests * progress),
+        ecosystems: Math.floor(opensourceStats.totalEcosystems * progress),
       });
       
       if (currentStep >= steps) {
         clearInterval(timer);
         setCountedStats({
-          contributions: opensourceStats.totalContributions,
-          repositories: opensourceStats.totalRepositories,
-          prs: opensourceStats.totalPRs,
+          projects: opensourceStats.totalProjects,
+          pullRequests: opensourceStats.totalPullRequests,
+          ecosystems: opensourceStats.totalEcosystems,
         });
       }
     }, interval);
@@ -65,33 +64,25 @@ export default function OpensourcePage() {
 
   const statCards = [
     {
-      icon: GitPullRequest,
-      label: "Pull Requests",
-      value: countedStats.prs,
+      icon: FolderKanban,
+      label: "Projects",
+      value: countedStats.projects,
       suffix: "+",
       color: "text-primary",
       bgColor: "bg-primary/10",
     },
     {
-      icon: Code2,
-      label: "Repositories",
-      value: countedStats.repositories,
-      suffix: "+",
+      icon: GitPullRequest,
+      label: "Pull Requests Merged",
+      value: countedStats.pullRequests,
+      suffix: "",
       color: "text-foreground",
       bgColor: "bg-background/50",
     },
     {
-      icon: GitBranch,
-      label: "Contributions",
-      value: countedStats.contributions,
-      suffix: "+",
-      color: "text-foreground",
-      bgColor: "bg-background/50",
-    },
-    {
-      icon: Calendar,
-      label: "Years Active",
-      value: opensourceStats.ecosystemYears,
+      icon: Network,
+      label: "Ecosystems",
+      value: countedStats.ecosystems,
       suffix: "",
       color: "text-foreground",
       bgColor: "bg-background/50",
@@ -134,7 +125,7 @@ export default function OpensourcePage() {
           </div>
 
           {/* Statistics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
             {statCards.map((stat, index) => {
               const Icon = stat.icon;
               return (
@@ -169,19 +160,41 @@ export default function OpensourcePage() {
                 <h3 className="text-xl font-bold text-foreground">Primary Ecosystems</h3>
               </div>
               <div className="space-y-3">
-                {opensourceStats.ecosystems.map((ecosystem) => (
-                  <div key={ecosystem} className="flex items-center justify-between p-3 rounded-xl bg-background/50 border border-border/50">
-                    <span className="font-semibold text-foreground">{ecosystem}</span>
-                    <span className="text-sm text-foreground/60">{opensourceStats.ecosystemYears} active</span>
-                  </div>
-                ))}
+                {opensourceStats.ecosystems.map((ecosystem) => {
+                  const ecosystemLogos: Record<string, string> = {
+                    Ethereum: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+                    Starknet: "https://www.starknet.io/favicon.ico",
+                    Stellar: "https://www.stellar.org/favicon.ico",
+                    Optimism: "https://cryptologos.cc/logos/optimism-ethereum-op-logo.png",
+                  };
+                  
+                  return (
+                    <div key={ecosystem} className="flex items-center justify-between p-3 rounded-xl bg-background/50 border border-border/50">
+                      <div className="flex items-center gap-3">
+                        {ecosystemLogos[ecosystem] && (
+                          <div className="relative w-8 h-8 flex-shrink-0 bg-background/30 rounded-full p-1 overflow-hidden">
+                            <Image
+                              src={ecosystemLogos[ecosystem]}
+                              alt={`${ecosystem} logo`}
+                              fill
+                              className="object-cover rounded-full"
+                              unoptimized
+                            />
+                          </div>
+                        )}
+                        <span className="font-semibold text-foreground">{ecosystem}</span>
+                      </div>
+                      <span className="text-sm text-foreground/60">{opensourceStats.ecosystemYears} active</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
             <div className="p-6 rounded-2xl bg-background/50 border border-border backdrop-blur-sm hover:bg-background/70 transition-all duration-300">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 rounded-xl bg-primary/10">
-                  <Star className="w-5 h-5 text-primary" />
+                  <GitBranch className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-xl font-bold text-foreground">Notable Contributions</h3>
               </div>

@@ -60,11 +60,21 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
   const isLoading = status !== "ready";
 
   // Extract text content from message parts
-  const getMessageContent = (message: any) => {
+  interface MessagePart {
+    type: string;
+    text?: string;
+  }
+
+  interface MessageWithParts {
+    parts?: MessagePart[];
+    content?: string;
+  }
+
+  const getMessageContent = (message: MessageWithParts) => {
     if (message.parts && Array.isArray(message.parts)) {
       return message.parts
-        .filter((part: any) => part.type === "text")
-        .map((part: any) => part.text)
+        .filter((part: MessagePart) => part.type === "text")
+        .map((part: MessagePart) => part.text || "")
         .join("");
     }
     return message.content || "";
