@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, FolderKanban, GitBranch, MessageCircle, Code2, Menu, X } from "lucide-react";
+import { Home, FolderKanban, GitBranch, MessageCircle, Code2, Menu, X, Mail } from "lucide-react";
 
 const navItems = [
   { href: "/", label: "Home", icon: Home, color: "text-primary" },
   { href: "/projects", label: "Projects", icon: FolderKanban, color: "text-foreground" },
   { href: "/opensource", label: "Open Source", icon: GitBranch, color: "text-foreground" },
-  { href: "/contact", label: "Contact", icon: MessageCircle, color: "text-foreground" },
+  { href: "/contact", label: "Contact", icon: Mail, color: "text-foreground" },
   { href: "/ask", label: "Chat", icon: MessageCircle, color: "text-primary" },
 ];
 

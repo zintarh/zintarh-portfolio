@@ -3,7 +3,7 @@
 import { bubbleBase } from "@/lib/constants";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { SendIcon } from "lucide-react";
+import { SendIcon, MessageSquare } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function ChatInterface({ prompt }: { prompt: string }) {
@@ -80,32 +80,69 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
     return message.content || "";
   };
 
+  const suggestions = [
+    "Tell me about your experience",
+    "What projects have you worked on?",
+    "What's your tech stack?",
+    "How can I contact you?",
+  ];
+
   return (
     <div className="h-screen flex flex-col max-w-6xl mx-auto rounded-3xl bg-transparent">
       {messages.length === 0 ? (
         <div className="flex-1 flex items-center justify-center p-6">
-          <div className="w-full max-w-4xl flex items-center justify-between border-2 bg-background border-border rounded-full h-[72px] px-4">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="What do you want to know about Zintarh?"
-              className="flex-1 h-full outline-0 placeholder:text-base font-medium placeholder:text-foreground/60"
-              disabled={isLoading}
-            />
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                if (input.trim() && status === "ready") {
-                  sendMessage({ text: input });
-                  setInput("");
-                }
-              }}
-              disabled={!input.trim() || isLoading}
-              className="ml-2 rounded-full hover:bg-primary flex items-center justify-center border-2 border-border bg-background h-10 w-10 disabled:opacity-50"
-            >
-              <SendIcon size={18} />
-            </button>
+          <div className="w-full max-w-3xl">
+            {/* Microsoft Copilot-style centered input */}
+            <div className="relative mb-8">
+              <div className="relative flex items-center">
+                <div className="absolute left-4 z-10">
+                  <MessageSquare className="w-5 h-5 text-foreground/40" />
+                </div>
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Ask me anything about Zintarh..."
+                  className="w-full h-14 pl-14 pr-14 bg-background/80 backdrop-blur-sm border-2 border-border rounded-2xl outline-none focus:border-primary transition-colors placeholder:text-foreground/50 text-foreground text-base font-medium shadow-lg"
+                  disabled={isLoading}
+                  autoFocus
+                />
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (input.trim() && status === "ready") {
+                      sendMessage({ text: input });
+                      setInput("");
+                    }
+                  }}
+                  disabled={!input.trim() || isLoading}
+                  className="absolute right-2 h-10 w-10 rounded-xl bg-primary hover:bg-primary/90 disabled:bg-background/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all shadow-md disabled:shadow-none"
+                  aria-label="Send message"
+                >
+                  <SendIcon size={18} className="text-primary-foreground" />
+                </button>
+              </div>
+            </div>
+
+            {/* Suggestions */}
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {suggestions.map((suggestion, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setInput(suggestion);
+                    if (status === "ready") {
+                      sendMessage({ text: suggestion });
+                      setInput("");
+                    }
+                  }}
+                  className="px-4 py-2 rounded-full bg-background/50 border border-border/50 hover:border-border hover:bg-background/70 text-sm text-foreground/70 hover:text-foreground transition-all"
+                  disabled={isLoading}
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       ) : (
@@ -145,21 +182,25 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
           </div>
 
           <div className="sticky bottom-0 p-4 backdrop-blur-sm">
-            <form onSubmit={handleSubmit} className="flex items-center justify-between border-2 bg-background border-border rounded-3xl h-fit py-5 px-4">
+            <form onSubmit={handleSubmit} className="relative flex items-center">
+              <div className="absolute left-4 z-10">
+                <MessageSquare className="w-5 h-5 text-foreground/40" />
+              </div>
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="What do you want to know about Zintarh?"
-                className="flex-1 h-full outline-0 placeholder:text-xs sm:placeholder:text-base font-medium placeholder:text-foreground/80"
+                placeholder="Ask me anything about Zintarh..."
+                className="w-full h-14 pl-14 pr-14 bg-background/80 backdrop-blur-sm border-2 border-border rounded-2xl outline-none focus:border-primary transition-colors placeholder:text-foreground/50 text-foreground text-base font-medium shadow-lg"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="ml-2 rounded-full hover:bg-primary flex items-center justify-center border-2 border-border bg-background sm:h-10 sm:w-10 h-8 w-8 disabled:opacity-50"
+                className="absolute right-2 h-10 w-10 rounded-xl bg-primary hover:bg-primary/90 disabled:bg-background/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all shadow-md disabled:shadow-none"
+                aria-label="Send message"
               >
-                <SendIcon size={18} />
+                <SendIcon size={18} className="text-primary-foreground" />
               </button>
             </form>
           </div>

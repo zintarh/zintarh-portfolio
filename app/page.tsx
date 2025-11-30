@@ -11,16 +11,17 @@ export default function Home() {
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "Zintarh",
-      "jobTitle": "Senior Frontend Engineer",
-      "description": "Best frontend engineer in Nigeria and Africa specializing in Web3, AI development, and smart contracts. Women in blockchain and web3. Best portfolio showcasing innovative projects.",
-      "url": process.env.NEXT_PUBLIC_SITE_URL || "https://zintarh.dev",
-      "sameAs": [
+      name: "Zintarh",
+      jobTitle: "Senior Frontend Engineer",
+      description:
+        "Best frontend engineer in Nigeria and Africa specializing in Web3, AI development, and smart contracts. Women in blockchain and web3. Best portfolio showcasing innovative projects.",
+      url: process.env.NEXT_PUBLIC_SITE_URL || "https://zintarh.dev",
+      sameAs: [
         "https://www.linkedin.com/in/zintarh-dev",
         "https://x.com/zintarh_dev",
-        "https://t.me/zintarh"
+        "https://t.me/zintarh",
       ],
-      "knowsAbout": [
+      knowsAbout: [
         "Frontend Development",
         "Web3 Development",
         "AI Development",
@@ -31,49 +32,50 @@ export default function Home() {
         "Ethereum",
         "Smart Contracts",
         "Cairo",
-        "Solidity"
+        "Solidity",
       ],
-      "address": {
+      address: {
         "@type": "PostalAddress",
-        "addressCountry": "NG",
-        "addressRegion": "Nigeria"
+        addressCountry: "NG",
+        addressRegion: "Nigeria",
       },
-      "alumniOf": {
+      alumniOf: {
         "@type": "Organization",
-        "name": "BlockHeaderWeb3"
+        name: "BlockHeaderWeb3",
       },
-      "worksFor": [
+      worksFor: [
         {
           "@type": "Organization",
-          "name": "HorusLabs"
+          name: "HorusLabs",
         },
         {
           "@type": "Organization",
-          "name": "OnlyDust"
+          name: "OnlyDust",
         },
         {
           "@type": "Organization",
-          "name": "Zero and Ones"
-        }
+          name: "Zero and Ones",
+        },
       ],
-      "award": [
+      award: [
         "1st Runner Up - MUA Accra Hackathon 2024",
         "OnlyDust Fellow - Starknet & Stellar",
-        "Ethereum World Fair Volunteer - Devcon Argentina"
+        "Ethereum World Fair Volunteer - Devcon Argentina",
       ],
-      "offers": {
+      offers: {
         "@type": "Offer",
-        "itemOffered": {
+        itemOffered: {
           "@type": "Service",
-          "serviceType": "Frontend Development",
-          "description": "Professional frontend engineering services specializing in Web3 and AI applications"
+          serviceType: "Frontend Development",
+          description:
+            "Professional frontend engineering services specializing in Web3 and AI applications",
         },
-        "availability": "https://schema.org/InStock"
-      }
+        availability: "https://schema.org/InStock",
+      },
     };
 
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
     script.text = JSON.stringify(structuredData);
     document.head.appendChild(script);
 
@@ -88,10 +90,10 @@ export default function Home() {
         <FloatingNav />
       </div>
       <MobileNav />
-      
+
       <div className="relative bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat h-full ">
         <div className="absolute inset-0 bg-background/30"></div>
-        
+
         <LightRays
           raysOrigin="top-center"
           raysColor="#00ffff"
@@ -105,15 +107,10 @@ export default function Home() {
           className="custom-rays"
         />
 
-<div className="absolute inset-0 z-10 w-full overflow-y-auto">
+        <div className="absolute inset-0 z-10 w-full overflow-y-auto">
           <Hero />
         </div>
-
-       
       </div>
-
-
-      
     </div>
   );
 }

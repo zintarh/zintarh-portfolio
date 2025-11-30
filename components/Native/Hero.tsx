@@ -14,12 +14,11 @@ import {
   ExternalLink,
   Image as ImageIcon,
 } from "lucide-react";
-import { getProjects } from "@/lib/project";
+
 
 export default function Hero() {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
-  const [prompt, setPrompt] = useState<string>("");
   const [countedStats, setCountedStats] = useState({
     projects: 0,
     pullRequests: 0,
@@ -76,7 +75,7 @@ export default function Hero() {
     },
     {
       icon: Network,
-      title: "Web3 & Smart Contracts",
+      title: "Blockchain Engineering",
       description: "Decentralized solutions on Starknet & Ethereum",
       tech: ["Cairo", "Solidity", "Rust"],
       color: "text-foreground",
@@ -101,13 +100,13 @@ export default function Hero() {
     },
     { 
       icon: Building2, 
-      text: "OnlyDust Fellow - Starknet & Stellar",
+      text: "Ex OnlyDust Fellow - Starknet & Stellar",
       link: "https://drive.google.com/drive/folders/YOUR_ONLYDUST_FOLDER_ID",
-      description: "View pictures"
+      description: "View Contributions"
     },
     { 
       icon: GitBranch, 
-      text: "Starknet Frontend Mentor at BlockHeaderWeb3, Kaduna",
+      text: "Former Starknet Frontend Mentor at BlockHeaderWeb3, Kaduna",
       link: "https://drive.google.com/drive/folders/YOUR_MENTORING_FOLDER_ID",
       description: "View pictures"
     },
@@ -139,7 +138,7 @@ export default function Hero() {
               </h1>
 
               <p className="text-xl sm:text-2xl md:text-3xl font-medium text-foreground/90 mb-4">
-                Senior Frontend & AI Engineer
+                Senior Frontend & Blockchain Engineer
               </p>
 
               <p className="text-base sm:text-lg text-foreground/70 leading-relaxed max-w-xl">
@@ -180,7 +179,7 @@ export default function Hero() {
                   href={achievement.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative p-4 rounded-xl bg-background/50 border border-border backdrop-blur-sm hover:bg-background/70 hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer block"
+                  className="group relative p-4  rounded-xl bg-background/50 border border-border backdrop-blur-sm hover:bg-background/70 hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer block"
                   style={{
                     animationDelay: `${index * 150}ms`,
                     opacity: isVisible ? 1 : 0,
@@ -192,10 +191,10 @@ export default function Hero() {
                       <Icon className="w-5 h-5 text-primary" />
                     </div>
                     <div className="flex-1">
-                      <span className="text-xs font-medium text-foreground/80 block">{achievement.text}</span>
+                      <span className="text-base font-medium text-foreground/80 block">{achievement.text}</span>
                       <div className="flex items-center gap-1 mt-1">
                         <ImageIcon className="w-3 h-3 text-primary/60" />
-                        <span className="text-xs text-primary/60 font-medium">{achievement.description}</span>
+                        <span className="text-sm text-primary/60 font-medium">{achievement.description}</span>
                         <ExternalLink className="w-3 h-3 text-primary/60 ml-1" />
                       </div>
                     </div>
@@ -215,7 +214,7 @@ export default function Hero() {
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg sm:text-xl font-semibold text-foreground">
-            Open Source Contributions
+            Open Source Contributions Across Web3 Ecosystems
           </h2>
           <div className="h-px flex-1 bg-border/50 ml-4"></div>
         </div>
