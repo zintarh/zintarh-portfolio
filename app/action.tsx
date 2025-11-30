@@ -80,7 +80,7 @@ async function showProjects(userInput: string) {
         <div
           className={`sm:mr-auto sm:max-w-[50%] w-full ${bubbleBase} bg-[#202020] text-foreground text-lg rounded-bl-md`}
         >
-          <div dangerouslySetInnerHTML={{ __html: content }} />;
+          <div dangerouslySetInnerHTML={{ __html: content }} />
         </div>
       );
     },

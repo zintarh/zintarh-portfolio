@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Source_Code_Pro, Inter } from "next/font/google";
+import { Source_Code_Pro, Inter, Gloria_Hallelujah } from "next/font/google";
 import { AI } from "./action";
 import "./globals.css";
 
@@ -11,6 +11,12 @@ const interFont = Inter({
 const sourceCodePro = Source_Code_Pro({
   variable: "--font-source-code-pro",
   subsets: ["latin"],
+});
+
+const gloriaFont = Gloria_Hallelujah({
+  variable: "--font-gloria",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${interFont.variable} ${sourceCodePro.variable} antialiased`}
+        className={`${interFont.variable} ${sourceCodePro.variable} ${gloriaFont.variable} antialiased`}
       >
         <AI>{children}</AI>
       </body>
