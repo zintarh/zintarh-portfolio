@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Mail, MessageCircle, Send, Linkedin, Twitter, MessageSquare, ArrowRight } from "lucide-react";
+import { Mail, MessageCircle, Send, Github, Twitter, MessageSquare, ArrowRight } from "lucide-react";
 import FloatingNav from "@/components/Native/FloatingNav";
 import MobileNav from "@/components/Native/MobileNav";
 
@@ -14,22 +14,22 @@ export default function ContactPage() {
 
   const contactMethods = [
     {
+      id: "github",
+      icon: Github,
+      label: "GitHub",
+      value: "zintarh",
+      href: "https://github.com/zintarh",
+      description: "View my code and contributions",
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+    },
+    {
       id: "email",
       icon: Mail,
       label: "Email",
       value: "kateberryd@gmail.com",
       href: "mailto:kateberryd@gmail.com",
       description: "For collaborations and inquiries",
-      color: "text-primary",
-      bgColor: "bg-primary/10",
-    },
-    {
-      id: "linkedin",
-      icon: Linkedin,
-      label: "LinkedIn",
-      value: "zintarh-dev",
-      href: "https://www.linkedin.com/in/zintarh-dev",
-      description: "Professional network",
       color: "text-foreground",
       bgColor: "bg-background/50",
     },
@@ -97,8 +97,8 @@ export default function ContactPage() {
                 <a
                   key={method.id}
                   href={method.href}
-                  target={method.id !== "email" ? "_blank" : undefined}
-                  rel={method.id !== "email" ? "noopener noreferrer" : undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group relative p-6 rounded-2xl bg-background/50 border border-border backdrop-blur-sm hover:bg-background/70 hover:border-border transition-all duration-300 hover:scale-105 hover:shadow-xl"
                   onMouseEnter={() => setHoveredCard(method.id)}
                   onMouseLeave={() => setHoveredCard(null)}
