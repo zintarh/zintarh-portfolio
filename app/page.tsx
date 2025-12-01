@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    // Add structured data for SEO
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -85,7 +84,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative bg-background min-h-screen overflow-y-auto h-screen">
+    <div className="relative bg-background h-screen ">
       <div className="fixed top-6 left-6 z-50 hidden md:block">
         <FloatingNav />
       </div>
@@ -107,7 +106,7 @@ export default function Home() {
           className="custom-rays"
         />
 
-        <div className="absolute inset-0 z-10 w-full overflow-y-auto">
+        <div className="absolute inset-0 z-10 w-full overflow-y-auto pt-0 md:pt-0">
           <Hero />
         </div>
       </div>

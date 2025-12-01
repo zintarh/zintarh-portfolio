@@ -37,11 +37,11 @@ export const ProjectCard: React.FC<ProjectData> = ({
           )}
         </div>
         
-        <h3 className="font-mono font-bold text-lg text-foreground mb-3 line-clamp-2">
+        <h3 className="font-mono font-bold text-base text-foreground mb-3 line-clamp-2">
           {title}
         </h3>
         
-        <p className="text-foreground/80 text-sm mb-4 flex-grow line-clamp-3">
+        <p className="text-foreground/80 text-xs mb-4 flex-grow line-clamp-3">
           {description}
         </p>
 

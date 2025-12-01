@@ -96,7 +96,7 @@ export default function OpensourcePage() {
       </div>
       <MobileNav />
 
-      <div className="p-4 sm:p-6 lg:p-8 md:ml-24 bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat relative overflow-y-auto min-h-screen">
+      <div className="p-6 sm:p-8 lg:p-10 md:ml-24 bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat relative overflow-y-auto min-h-screen">
         <div className="absolute inset-0 bg-background/30 -z-10"></div>
         
         <div className={`relative z-10 max-w-7xl mx-auto transition-all duration-1000 ${
@@ -109,42 +109,47 @@ export default function OpensourcePage() {
                 <GitBranch className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
               </div>
               <div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
                   Open Source
                 </h1>
                 <div className="flex items-center gap-2 mt-2">
                   <div className="h-1 w-12 bg-primary rounded-full"></div>
-                  <span className="text-foreground/50 text-sm">Building for the Community</span>
+                  <span className="text-foreground/50 text-xs">Building for the Community</span>
                 </div>
               </div>
             </div>
-            <p className="text-foreground/70 text-lg sm:text-xl max-w-3xl leading-relaxed">
+            <p className="text-foreground/70 text-sm sm:text-base max-w-3xl leading-relaxed">
               Contributing to the future of decentralized technology. Deep involvement in Starknet and Stellar ecosystems, 
               building tools and infrastructure that empower developers worldwide.
             </p>
           </div>
 
           {/* Statistics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 sm:gap-4 mb-12">
             {statCards.map((stat, index) => {
               const Icon = stat.icon;
               return (
                 <div
                   key={stat.label}
-                  className="group relative p-6 rounded-2xl bg-background/50 border border-border backdrop-blur-sm hover:bg-background/70 hover:border-border transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="group relative p-2 sm:p-6 rounded-xl sm:rounded-2xl bg-background/50 border border-border backdrop-blur-sm hover:bg-background/70 hover:border-border transition-all duration-300 hover:scale-105 hover:shadow-xl flex flex-col sm:flex-col"
                   style={{
                     animationDelay: `${index * 100}ms`,
                     opacity: isVisible ? 1 : 0,
                     transform: isVisible ? "translateY(0)" : "translateY(20px)",
                   }}
                 >
-                  <div className={`w-12 h-12 rounded-xl ${stat.bgColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className={`w-6 h-6 ${stat.color}`} />
+                  {/* Mobile: Horizontal layout, Desktop: Vertical layout */}
+                  <div className="flex sm:flex-col items-center sm:items-start gap-2 sm:gap-0 mb-0 sm:mb-4">
+                    <div className={`w-6 h-6 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${stat.bgColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
+                      <Icon className={`w-3.5 h-3.5 sm:w-6 sm:h-6 ${stat.color}`} />
+                    </div>
+                    <div className="flex flex-col sm:flex-col items-start sm:items-start min-w-0 flex-1">
+                      <div className="text-base sm:text-2xl md:text-3xl font-bold text-foreground leading-tight">
+                        {stat.value}{stat.suffix}
+                      </div>
+                      <div className="text-[9px] sm:text-xs text-foreground/60 font-medium leading-tight">{stat.label}</div>
+                    </div>
                   </div>
-                  <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                    {stat.value}{stat.suffix}
-                  </div>
-                  <div className="text-sm text-foreground/60 font-medium">{stat.label}</div>
                 </div>
               );
             })}
@@ -157,7 +162,7 @@ export default function OpensourcePage() {
                 <div className="p-2 rounded-xl bg-primary/10">
                   <Globe className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground">Primary Ecosystems</h3>
+                <h3 className="text-base font-bold text-foreground">Primary Ecosystems</h3>
               </div>
               <div className="space-y-3">
                 {opensourceStats.ecosystems.map((ecosystem) => {
@@ -196,7 +201,7 @@ export default function OpensourcePage() {
                 <div className="p-2 rounded-xl bg-primary/10">
                   <GitBranch className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground">Notable Contributions</h3>
+                <h3 className="text-base font-bold text-foreground">Notable Contributions</h3>
               </div>
               <div className="space-y-3">
                 <div className="p-3 rounded-xl bg-background/50 border border-border/50">
@@ -215,7 +220,7 @@ export default function OpensourcePage() {
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-6">
               <TrendingUp className="w-5 h-5 text-foreground/60" />
-              <h2 className="text-2xl font-bold text-foreground">Featured Open Source Projects</h2>
+              <h2 className="text-lg font-bold text-foreground">Featured Open Source Projects</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 pb-12">
               {opensourceProjects.map((project: ProjectData, index: number) => (
@@ -242,7 +247,7 @@ export default function OpensourcePage() {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-border/50 flex items-center justify-center">
                   <GitBranch className="w-8 h-8 text-foreground/40" />
                 </div>
-                <p className="text-foreground/60 text-lg font-medium">
+                <p className="text-foreground/60 text-sm font-medium">
                   No open source projects found.
                 </p>
               </div>

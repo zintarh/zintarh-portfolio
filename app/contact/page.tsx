@@ -62,7 +62,7 @@ export default function ContactPage() {
       </div>
       <MobileNav />
 
-      <div className="p-4 sm:p-6 lg:p-8 md:ml-24 bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat relative overflow-y-auto min-h-screen">
+      <div className="p-6 sm:p-8 lg:p-10 md:ml-24 bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat relative overflow-y-auto min-h-screen">
         <div className="absolute inset-0 bg-background/30 -z-10"></div>
         
         <div className={`relative z-10 max-w-6xl mx-auto transition-all duration-1000 ${
@@ -74,16 +74,16 @@ export default function ContactPage() {
               <div className="p-3 rounded-2xl bg-background/80 border border-border backdrop-blur-sm">
                 <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
                 Let&apos;s Connect
               </h1>
             </div>
             <div className="flex items-center justify-center gap-2 mb-6">
               <div className="h-1 w-12 bg-primary rounded-full"></div>
-              <span className="text-foreground/50 text-sm">Always open to collaborations</span>
+              <span className="text-foreground/50 text-xs">Always open to collaborations</span>
               <div className="h-1 w-12 bg-primary rounded-full"></div>
             </div>
-            <p className="text-foreground/70 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+            <p className="text-foreground/70 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
               I&apos;m always excited to discuss new projects, collaborations, or just chat about technology. 
               Whether you&apos;re looking to build something amazing or want to connect, I&apos;d love to hear from you.
             </p>
@@ -116,9 +116,9 @@ export default function ContactPage() {
                       hoveredCard === method.id ? "translate-x-1 opacity-100" : "translate-x-0 opacity-0"
                     }`} />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">{method.label}</h3>
-                  <p className="text-foreground/90 font-medium mb-2">{method.value}</p>
-                  <p className="text-sm text-foreground/60">{method.description}</p>
+                  <h3 className="text-base font-bold text-foreground mb-2">{method.label}</h3>
+                  <p className="text-foreground/90 font-medium mb-2 text-sm">{method.value}</p>
+                  <p className="text-xs text-foreground/60">{method.description}</p>
                   {hoveredCard === method.id && (
                     <div className="absolute inset-0 bg-primary/5 rounded-2xl -z-10"></div>
                   )}

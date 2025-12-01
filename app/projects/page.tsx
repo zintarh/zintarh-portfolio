@@ -53,7 +53,7 @@ export default function ProjectsPage() {
       </div>
       <MobileNav />
 
-      <div className="p-4 sm:p-6 lg:p-8 md:ml-24 bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat relative overflow-y-auto min-h-screen">
+      <div className="p-6 sm:p-8 lg:p-10 md:ml-24 bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat relative overflow-y-auto min-h-screen">
         <div className="absolute inset-0 bg-background/30 -z-10"></div>
         
         <div className={`relative z-10 max-w-7xl mx-auto transition-all duration-1000 ${
@@ -66,10 +66,10 @@ export default function ProjectsPage() {
                 <Code2 className="w-8 h-8 text-primary" />
               </div>
               <div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
                   My Work
                 </h1>
-                <p className="text-foreground/60 text-sm mt-2">
+                <p className="text-foreground/60 text-xs mt-2">
                   {categoryStats.all} projects • {selectedCategory === "all" ? "All Categories" : selectedCategory.toUpperCase()}
                 </p>
               </div>
@@ -191,7 +191,7 @@ export default function ProjectsPage() {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-border/50 flex items-center justify-center">
                   <Search className="w-8 h-8 text-foreground/40" />
                 </div>
-                <p className="text-foreground/60 text-lg font-medium mb-2">
+                <p className="text-foreground/60 text-sm font-medium mb-2">
                   No projects found
                 </p>
                 <p className="text-foreground/40 text-sm">

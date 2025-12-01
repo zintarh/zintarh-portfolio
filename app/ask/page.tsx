@@ -25,7 +25,7 @@ function AskPageContent() {
       </div>
       <MobileNav />
 
-      <div className="p-4 md:ml-24 bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat relative overflow-y-auto min-h-screen">
+      <div className="p-6 sm:p-8 md:ml-24 bg-gradient-to-br from-background via-background/95 to-background/90 bg-[url('/bg3.jpg')] bg-cover bg-center bg-no-repeat relative overflow-y-auto min-h-screen">
         <div className="absolute inset-0 bg-background/30 -z-10"></div>
         <div className="relative z-10 h-full max-w-6xl mx-auto">
           <ChatInterface prompt={prompt} />

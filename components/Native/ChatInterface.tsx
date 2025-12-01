@@ -32,12 +32,16 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
   }, [prompt, messages.length, hasAutoSubmitted, sendMessage]);
 
   useEffect(() => {
-    if (endRef.current) {
-      endRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
-    } else if (listRef.current) {
-      listRef.current.scrollTop = listRef.current.scrollHeight;
-    }
-  }, [messages.length]);
+    // Scroll to bottom when messages update (including streaming updates)
+    const timer = setTimeout(() => {
+      if (endRef.current) {
+        endRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+      } else if (listRef.current) {
+        listRef.current.scrollTop = listRef.current.scrollHeight;
+      }
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [messages]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,27 +62,6 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
   };
 
   const isLoading = status !== "ready";
-
-  // Extract text content from message parts
-  interface MessagePart {
-    type: string;
-    text?: string;
-  }
-
-  interface MessageWithParts {
-    parts?: MessagePart[];
-    content?: string;
-  }
-
-  const getMessageContent = (message: MessageWithParts) => {
-    if (message.parts && Array.isArray(message.parts)) {
-      return message.parts
-        .filter((part: MessagePart) => part.type === "text")
-        .map((part: MessagePart) => part.text || "")
-        .join("");
-    }
-    return message.content || "";
-  };
 
   const suggestions = [
     "Tell me about your experience",
@@ -153,7 +136,6 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
           >
             <div className="flex flex-col justify-end space-y-4 w-full min-h-full">
               {messages.map((message) => {
-                const content = getMessageContent(message);
                 return (
                   <div
                     key={message.id}
@@ -163,12 +145,13 @@ export default function ChatInterface({ prompt }: { prompt: string }) {
                         : `sm:mr-auto sm:max-w-[50%] w-full ${bubbleBase} bg-[#202020] text-foreground text-lg rounded-bl-md`
                     }
                   >
-                    <div 
-                      className="text-sm sm:text-lg"
-                      dangerouslySetInnerHTML={{ 
-                        __html: content
-                      }} 
-                    />
+                    <div className="text-sm sm:text-lg whitespace-pre-wrap break-words">
+                      {message.parts?.map((part, index) =>
+                        part.type === "text" ? (
+                          <span key={index} dangerouslySetInnerHTML={{ __html: part.text || "" }} />
+                        ) : null
+                      )}
+                    </div>
                   </div>
                 );
               })}
